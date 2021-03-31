@@ -111,6 +111,7 @@ chrome.runtime.onMessage.addListener(function(response, sender, sendResponse){
         error: function(xhr, ajaxOptions, thrownError){
             console.log(xhr.status);
             console.log(thrownError);
+            console.log("test");
         }
     });
 });
