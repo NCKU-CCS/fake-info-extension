@@ -1,3 +1,0 @@
-uvicorn DB:my_awesome_api --reload
-
-DROP TABLE ;
