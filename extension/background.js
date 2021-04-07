@@ -65,8 +65,8 @@ chrome.runtime.onMessage.addListener(function(response, sender, sendResponse){
         
             // 要送出的資料 (會被自動轉成查詢字串)
             data: {
-                user_id : user_id,
-                news_url : news_url
+                user_id,
+                news_url
             },
         
             // 要使用的要求method(方法)，POST 或 GET
