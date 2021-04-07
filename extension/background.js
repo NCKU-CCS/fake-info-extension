@@ -56,7 +56,7 @@ chrome.runtime.onMessage.addListener(function(response, sender, sendResponse){
     
 
    
-    function checkAccount3(){
+    function checkAccount(){
         let result ;
 
         $.ajax({
@@ -88,7 +88,7 @@ chrome.runtime.onMessage.addListener(function(response, sender, sendResponse){
         return result;
     }
 
-    var result = checkAccount3();
+    var result = checkAccount();
     if (result != null){
         console.log("You'd already voted this news");
         console.log("botton over.");
