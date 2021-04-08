@@ -50,11 +50,12 @@ chrome.runtime.onMessage.addListener(function(response, sender, sendResponse){
     // post resquest url 
     let requestURL = Parameters.api_url + user_id + "/" + news_url + "/" + news_result  ;
 
-    // data of json 
-    let dataJSON = {};
-    dataJSON["user_id"] = user_id ;
-    dataJSON["news_url"] = news_url ;
-    dataJSON["news_result"] = news_result ;
+    // data of json
+    let dataJSON = {
+        user_id : user_id ,
+        news_url : news_url ,
+        news_result : news_result 
+    };
    
     function checkAccount(){
         let result ;
