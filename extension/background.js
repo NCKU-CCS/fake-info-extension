@@ -1,3 +1,5 @@
+import Parameters from "./parameter";
+
 //指定比對的url：不允許片段表達式   
 //例如： *://*.google.com.tw/* 作為查詢字串不被接受因為host是一個片段表達式  
 let urlPattern = '*://udn.com/*';  
@@ -46,22 +48,20 @@ chrome.runtime.onMessage.addListener(function(response, sender, sendResponse){
     let news_url = response.title; 
 
     // post resquest url 
-    let requestURL = "http://127.0.0.1:8000/users/" + user_id + "/" + news_url + "/" + news_result  ;
+    let requestURL = Parameters.api_url + user_id + "/" + news_url + "/" + news_result  ;
 
     // data of json 
     let dataJSON = {};
     dataJSON["user_id"] = user_id ;
     dataJSON["news_url"] = news_url ;
     dataJSON["news_result"] = news_result ;
-    
-
    
     function checkAccount(){
         let result ;
 
         $.ajax({
             // 進行要求的網址(URL)
-            url: "http://127.0.0.1:8000/users/" + user_id + "/" + news_url ,
+            url: Parameters.api_url + user_id + "/" + news_url ,
         
             // 要送出的資料 (會被自動轉成查詢字串)
             data: {
