@@ -1,43 +1,43 @@
 import Parameters from "./parameter";
 
-//指定比對的url：不允許片段表達式   
-//例如： *://*.google.com.tw/* 作為查詢字串不被接受因為host是一個片段表達式  
-let urlPattern = '*://udn.com/*';  
+// 指定比對的url：不允許片段表達式
+// 例如： '*://udn.com/*' 作為查詢字串不被接受因為host是一個片段表達式
+let urlPattern = '*://udn.com/*';
 
-//利用 tabs.query api 查找畫面上的所有tab  
-function queryTabsAndShowPageActions(queryObject) {  
-    chrome.tabs.query(queryObject,  
-        function(tabs) {  
-            if (tabs && tabs.length > 0) {  
-                for (var i = 0; i < tabs.length; i++) {  
-                    //在加載完畢的tab上，使用chrome.pageAction.show 啟用按鈕  
-                    if (tabs[i].status === "complete") chrome.pageAction.show(tabs[i].id);  
-                }  
-            }  
-        }  
-    );  
-}  
+// 利用 tabs.query api 查找畫面上的所有tab
+function queryTabsAndShowPageActions(queryObject) {
+    chrome.tabs.query(queryObject,
+        function(tabs) {
+            if (tabs && tabs.length > 0) {
+                for (var i = 0; i < tabs.length; i++) {
+                    // 在加載完畢的tab上，使用chrome.pageAction.show 啟用按鈕
+                    if (tabs[i].status === "complete") chrome.pageAction.show(tabs[i].id);
+                }
+            }
+        }
+    );
+}
 
-//第一次的初始化 
-chrome.runtime.onInstalled.addListener(function() {  
-    queryTabsAndShowPageActions({  
-        "active": false,  
-        "currentWindow": true,  
-        "url": urlPattern  
-    });  
-});  
+// 第一次的初始化
+chrome.runtime.onInstalled.addListener(function() {
+    queryTabsAndShowPageActions({
+        "active": false,
+        "currentWindow": true,
+        "url": urlPattern
+    });
+});
 
-//每次tab有變動，檢查現在這個current tab是否在指定的 url pattern底下  
-chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab) {  
-    queryTabsAndShowPageActions({  
-        "active": true,  
-        "currentWindow": true,  
-        "url": urlPattern  
-    });  
-});  
+// 每次tab有變動，檢查現在這個current tab是否在指定的 url pattern底下
+chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab) {
+    queryTabsAndShowPageActions({
+        "active": true,
+        "currentWindow": true,
+        "url": urlPattern
+    });
+});
 
 
-// for post request 
+// for post request
 chrome.runtime.onMessage.addListener(function(response, sender, sendResponse){
 
 
@@ -45,31 +45,31 @@ chrome.runtime.onMessage.addListener(function(response, sender, sendResponse){
 
     let user_id = response.user_id;
     let news_result = response.result;
-    let news_url = response.title; 
+    let news_url = response.title;
 
-    // post resquest url 
+    // post resquest url
     let requestURL = Parameters.api_url + user_id + "/" + news_url + "/" + news_result  ;
 
     // data of json
     let dataJSON = {
         user_id : user_id ,
         news_url : news_url ,
-        news_result : news_result 
+        news_result : news_result
     };
-   
+
     function checkAccount(){
         let result ;
 
         $.ajax({
             // 進行要求的網址(URL)
             url: Parameters.api_url + user_id + "/" + news_url ,
-        
+
             // 要送出的資料 (會被自動轉成查詢字串)
             data: {
                 user_id,
                 news_url
             },
-        
+
             // 要使用的要求method(方法)，POST 或 GET
             type: 'GET',
             async: false,

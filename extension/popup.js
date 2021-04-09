@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', function () {
       let user_id = userInfo.email;
       let url = tabs[0].url;
       let title = tabs[0].title;
-      $("#msgurl").text(url);   
+      $("#msgurl").text(url);
       $("#msgtitle").text(title);
       $("#msguserid").text(user_id);
       });
