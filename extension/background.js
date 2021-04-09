@@ -60,7 +60,7 @@ chrome.runtime.onMessage.addListener(function(response, sender, sendResponse){
 
         $.ajax({
             // 進行要求的網址(URL)
-            url: requestURL,
+            url:  "http://127.0.0.1:8000/users/" + user_id + "/" + news_url,
 
             // 要送出的資料 (會被自動轉成查詢字串)
             data: {
