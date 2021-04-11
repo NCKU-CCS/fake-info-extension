@@ -55,47 +55,6 @@ chrome.runtime.onMessage.addListener(function(response, sender, sendResponse){
         news_result : news_result
     };
 
-    function checkAccount(){
-        let result ;
-
-        $.ajax({
-            // 進行要求的網址(URL)
-            url:  "http://127.0.0.1:8000/users/" + user_id + "/" + news_url,
-
-            // 要送出的資料 (會被自動轉成查詢字串)
-            data: {
-                user_id,
-                news_url
-            },
-
-            // 要使用的要求method(方法)，POST 或 GET
-            type: 'GET',
-            async: false,
-            // 資料的類型
-            dataType : 'json',
-            contentType: "application/json;charset=utf-8",
-            success: function(returnData){
-                console.log(returnData);
-                console.log("get successed.");
-                result = returnData;
-            },
-            error: function(xhr, ajaxOptions, thrownError){
-                console.log(xhr.status);
-                console.log(thrownError);
-            }
-        })
-        return result;
-    }
-
-    var result = checkAccount();
-    if (result != null){
-        console.log("You'd already voted this news");
-        console.log("botton over.");
-        alert("You'd already voted this news");
-        return ;
-    }
-
-
     $.ajax({
         url: requestURL,
         data: JSON.stringify(dataJSON),
@@ -109,7 +68,9 @@ chrome.runtime.onMessage.addListener(function(response, sender, sendResponse){
         },
         error: function(xhr, ajaxOptions, thrownError){
             console.log(xhr.status);
-            console.log(thrownError);
+            console.log(thrownError.status);
+            console.log("You'd already voted this news");
+            alert("You'd already voted this news");
         }
     });
 });
