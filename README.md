@@ -10,6 +10,7 @@ The repo is a chrome extension for fake info system.
 
   <img src="./image/image3.png" alt="Editor" width="500">
 * Choose 'load unpacked' then open 'extension' folder in this repo.
+
   <img src="./image/image4.png" alt="Editor" width="500">
   <img src="./image/image5.png" alt="Editor" width="500">
 * Search any news in [聯合新聞網](https://udn.com/news/index).
