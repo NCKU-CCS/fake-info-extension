@@ -1,0 +1,18 @@
+{
+  "manifest_version" : 2,
+  "name" : "News",
+  "description" : "To determine fake news",
+  "version" : "2.0",
+  "page_action" : {
+      "default_title" : "Determine",
+      "default_icon" : "/images/icon.png",
+      "default_popup": "popup.html"
+  },
+  "background" : {
+      "scripts": ["jquery-3.1.1.min.js","background.js"] ,
+      "persistent" : false
+  },
+
+  "permissions" : ["identity","identity.email","tabs", "activeTab", "storage"],
+  "content_security_policy":"script-src 'self' https://apis.google.com; object-src 'self'"
+}
