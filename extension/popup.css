@@ -1,31 +1,71 @@
-h1 {
-	font-size:15px;
-	font-family: 'Courier New', Courier, monospace;
-	font-weight:bold;
+ #input_text {        /* comment */
+    font-size: 8pt;
+    height: 20px;
+    width: 250px;
+    border-top: none;
+    border-left: none;
+    border-right: none;
 }
-body {
-	width: 400px;
-	height: 400px;
-	background-color:rgb(210, 242, 245);
-	text-align: center;
-	font-size:15px;
-	font-family: 'Courier New', Courier, monospace;
-	font-weight:bold;
-	/* <length> values */
+ .user_data {         /* 圓餅圖 */
+    /* border: solid 1px black; */
+    position: relative;
+    left: 15px;
+    font-size: 10pt;
+    height: 220px;
+    width: 220px;
+ }
+ .user_comment {      /* 評論 */
+    position: relative;
+    top: 10px;
 }
-button {
-	width: 200px;
-	padding: 12px;
-	margin: 12px;
-	border: 1px solid black;
-	background-color: rgb(117, 117, 115);
-	font: size 10px;
-	font-family: 'Courier New', Courier, monospace;
+ .flex-container {    /* 最外層 */
+
+    display: flex;
+    flex-direction: column;
+
+  }
+
+ .user_botton {       /* 按鈕 */
+    /* border: solid 1px black; */
+    position: relative;
+	height:50px;
+    top: 20px;
 }
 
-/* .pie {
-	width: 200px;
-	height: 200px;
-	border-radius: 50%;
-	background: rgb(117, 117, 115);
-} */
+ #send_true {
+    font-size: 12pt;
+    background-color: #444444a4; /* Green */
+    border: solid 1px #444444a4;
+    border-style: none;
+    color: white;
+    height:40px;
+    width: 110px;
+    border-radius: 3px;
+ }
+ #send_false {
+    font-size: 12pt;
+    position: relative;
+    background-color: #d6d6d6a4; /* Green */
+    border-style: none;
+    color: #444444a4;
+    left: 30px;
+    height: 40px;
+    width: 110px;
+    border-radius: 3px;
+
+ }
+
+ #msgtitle {
+    position: relative;
+    color:#444444a4;
+    font-size: 12pt;
+    font-weight:bold;
+    left: 25px;
+    width: 200px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    text-align:center;
+    font-family:Microsoft JhengHei;
+    /* border: solid 1px black; */
+}

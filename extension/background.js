@@ -44,15 +44,17 @@ chrome.runtime.onMessage.addListener(function(response, sender, sendResponse){
     let user_id = response.user_id;
     let news_result = response.result;
     let news_url = response.title;
+    let comment = response.comment;
 
     // post resquest url
-    let requestURL = "http://127.0.0.1:8000/users/" + user_id + "/" + news_url + "/" + news_result  ;
+    let requestURL = "http://127.0.0.1:8000/users/" + user_id + "/" + news_url + "/" + news_result + "/" + comment ;
 
     // data of json
     let dataJSON = {
         user_id : user_id ,
         news_url : news_url ,
-        news_result : news_result
+        news_result : news_result,
+        comment : comment
     };
 
     $.ajax({

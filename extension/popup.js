@@ -14,17 +14,39 @@ document.addEventListener('DOMContentLoaded', function () {
 
 document.getElementById("send_true").addEventListener("click", result_true);
 document.getElementById("send_false").addEventListener("click", result_false);
+var ctx = document.getElementById('myChart').getContext('2d');
+
+var myChart = new Chart(ctx, {
+    type: 'pie',
+    data: {
+        labels: ['不真實', '真實'],
+        datasets: [{
+            label: '# of Votes',
+            data: [0, 1],
+            backgroundColor: [
+                '#d6d6d6a4',
+                '#444444a4',
+            ],
+            borderColor: [
+                '#d6d6d6a4',
+                '#444444a4',],
+            borderWidth: 0
+        }]
+    }
+});
 
 function  result_true() {
   chrome.tabs.query({'active': true, 'lastFocusedWindow': true}, function (tabs) {
     chrome.identity.getProfileUserInfo(function(userInfo) {
+      var val = document.getElementById("input_text").value ;
       let data = {
         url : tabs[0].url.toString(),
         title : tabs[0].title,
         user_id : userInfo.id.toString(),
         user_email : userInfo.email,
         result : 1,
-        get_noresult : 0
+        get_noresult : 0,
+        comment : val
       }
       chrome.runtime.sendMessage(data);
     });
@@ -34,13 +56,15 @@ function  result_true() {
 function  result_false() {
   chrome.tabs.query({'active': true, 'lastFocusedWindow': true}, function (tabs) {
     chrome.identity.getProfileUserInfo(function(userInfo) {
+      var val = document.getElementById("input_text").value ;
       let data = {
         url : tabs[0].url.toString(),
         title : tabs[0].title,
         user_id : userInfo.id.toString(),
         user_email : userInfo.email,
         result : 0,
-        get_noresult : 0
+        get_noresult : 0,
+        comment : val
       }
       chrome.runtime.sendMessage(data);
     });
