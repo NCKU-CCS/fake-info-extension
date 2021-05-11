@@ -17,22 +17,32 @@ document.getElementById("send_false").addEventListener("click", result_false);
 var ctx = document.getElementById('myChart').getContext('2d');
 
 var myChart = new Chart(ctx, {
-    type: 'pie',
-    data: {
-        labels: ['不真實', '真實'],
-        datasets: [{
-            label: '# of Votes',
-            data: [0, 1],
-            backgroundColor: [
-                '#d6d6d6a4',
-                '#444444a4',
-            ],
-            borderColor: [
-                '#d6d6d6a4',
-                '#444444a4',],
-            borderWidth: 0
-        }]
+  type: 'pie',
+  data: {
+      labels: ['不真實', '真實'],
+      datasets: [{
+          label: '# of Votes',
+          data: [12, 19],
+          backgroundColor: [
+              '#CB5A74',
+              '#3C5088',
+          ],
+          borderWidth: 0
+      }]
+  },
+  options: {
+    plugins: {
+        legend: {
+            reverse: true,
+            labels: {
+                // This more specific font property overrides the global property
+                font: {
+                    size: 18
+                }
+            }
+        }
     }
+  }
 });
 
 function  result_true() {
