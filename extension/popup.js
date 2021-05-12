@@ -8,42 +8,101 @@ document.addEventListener('DOMContentLoaded', function () {
       $("#msgurl").text(url);
       $("#msgtitle").text(title);
       $("#msguserid").text(user_id);
-      });
+    });
   });
 });
 
-document.getElementById("send_true").addEventListener("click", result_true);
-document.getElementById("send_false").addEventListener("click", result_false);
-var ctx = document.getElementById('myChart').getContext('2d');
-
-var myChart = new Chart(ctx, {
-  type: 'pie',
-  data: {
-      labels: ['不真實', '真實'],
-      datasets: [{
-          label: '# of Votes',
-          data: [12, 19],
-          backgroundColor: [
-              '#CB5A74',
-              '#3C5088',
-          ],
-          borderWidth: 0
-      }]
-  },
-  options: {
-    plugins: {
-        legend: {
-            reverse: true,
-            labels: {
-                // This more specific font property overrides the global property
-                font: {
-                    size: 18
-                }
+function foo (){
+callapi().then( v => {
+  chrome.tabs.query({'active': true, 'lastFocusedWindow': true}, function (tabs) {
+    chrome.identity.getProfileUserInfo(function(userInfo) {
+      let user_id = userInfo.email;
+      let url = tabs[0].url;
+      let title = tabs[0].title;
+      data = v;
+      arr = valcount(data, title);
+      // alert(data[0].news_result);
+      // alert(arr[1]);
+      let ctx = document.getElementById('myChart').getContext('2d');
+      let myChart = new Chart(ctx, {
+        type: 'pie',
+        data: {
+            labels: ['不真實', '真實'],
+            datasets: [{
+                label: '# of Votes',
+                data: [arr[1], arr[0]],
+                backgroundColor: [
+                    '#CB5A74',
+                    '#3C5088',
+                ],
+                borderWidth: 0
+            }]
+        },
+        options: {
+          plugins: {
+              legend: {
+                  reverse: true,
+                  labels: {
+                      // This more specific font property overrides the global property
+                      font: {
+                          size: 18
+                      }
+                  }
             }
+          }
         }
+      });
+    });
+  });
+});
+}
+
+foo();
+
+async function callapi(){
+  console.log("call http get success")
+  let jsondata;
+  await new Promise((resolve, reject) => {
+      $.ajax({
+          type :"GET",
+          url  : "http://localhost:8000/users",
+          data : "check",
+          dataType: "json",
+          success : function(result) {
+              jsondata = result;
+              resolve();
+          },
+          error: function (xhr, ajaxOptions, thrownError) {
+              resolve();
+          }
+      });
+  })
+  return jsondata;
+}
+
+function valcount(jsondata, title){
+  let i, t = 0, f = 0;
+  for (i = 0; i < jsondata.length; i++) {
+    if (jsondata[i].news_url == title){
+
+      if (jsondata[i].news_result){
+          t = t + 1;
+          console.log("t+1");
+          // alert("t+1");
+      }
+      else if (jsondata[i].news_result == false){
+          f = f + 1;
+          console.log("f+1");
+          // alert("f+1");
+      }
     }
   }
-});
+  return [t, f];
+}
+
+
+document.getElementById("send_true").addEventListener("click", result_true);
+document.getElementById("send_false").addEventListener("click", result_false);
 
 function  result_true() {
   chrome.tabs.query({'active': true, 'lastFocusedWindow': true}, function (tabs) {
@@ -61,6 +120,7 @@ function  result_true() {
       chrome.runtime.sendMessage(data);
     });
   });
+  window.location.reload();
 }
 
 function  result_false() {
@@ -79,4 +139,5 @@ function  result_false() {
       chrome.runtime.sendMessage(data);
     });
   });
+  window.location.reload();
 }
