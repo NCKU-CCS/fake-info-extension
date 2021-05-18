@@ -99,30 +99,20 @@ function valcount(jsondata, title){
   return [t, f];
 }
 
-
 document.getElementById("send_true").addEventListener("click", result_true);
 document.getElementById("send_false").addEventListener("click", result_false);
 
 function  result_true() {
-  chrome.tabs.query({'active': true, 'lastFocusedWindow': true}, function (tabs) {
-    chrome.identity.getProfileUserInfo(function(userInfo) {
-      var val = document.getElementById("input_text").value ;
-      let data = {
-        url : tabs[0].url.toString(),
-        title : tabs[0].title,
-        user_id : userInfo.id.toString(),
-        user_email : userInfo.email,
-        result : 1,
-        get_noresult : 0,
-        comment : val
-      }
-      chrome.runtime.sendMessage(data);
-    });
-  });
-  window.location.reload();
+  let result = 1;
+  botton_result(result);
 }
 
 function  result_false() {
+  let result = 0;
+  botton_result(result);
+}
+
+function botton_result(parameter){
   chrome.tabs.query({'active': true, 'lastFocusedWindow': true}, function (tabs) {
     chrome.identity.getProfileUserInfo(function(userInfo) {
       var val = document.getElementById("input_text").value ;
@@ -131,7 +121,7 @@ function  result_false() {
         title : tabs[0].title,
         user_id : userInfo.id.toString(),
         user_email : userInfo.email,
-        result : 0,
+        result : parameter,
         get_noresult : 0,
         comment : val
       }
