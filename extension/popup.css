@@ -17,7 +17,6 @@
 
     #msgtitle {			 /* title */
     position: relative;
-    /* color:#444444a4; */
     left: 40px;
 	top:  26px;
     width: 310px;
@@ -62,7 +61,6 @@
 	}
 
  	.user_botton {       /* 按鈕 */
-    /* border: solid 1px black; */
     position: relative;
     left: 15px;
 	height: 84px;

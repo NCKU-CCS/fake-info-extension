@@ -21,8 +21,6 @@ callapi().then( v => {
       let title = tabs[0].title;
       data = v;
       arr = valcount(data, title);
-      // alert(data[0].news_result);
-      // alert(arr[1]);
       let ctx = document.getElementById('myChart').getContext('2d');
       let myChart = new Chart(ctx, {
         type: 'pie',
