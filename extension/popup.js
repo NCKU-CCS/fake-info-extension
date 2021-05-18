@@ -85,12 +85,10 @@ function valcount(jsondata, title){
       if (jsondata[i].news_result){
           t = t + 1;
           console.log("t+1");
-          // alert("t+1");
       }
       else if (jsondata[i].news_result == false){
           f = f + 1;
           console.log("f+1");
-          // alert("f+1");
       }
     }
   }
