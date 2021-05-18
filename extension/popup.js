@@ -1,23 +1,17 @@
-
 document.addEventListener('DOMContentLoaded', function () {
 	chrome.tabs.query({'active': true, 'lastFocusedWindow': true}, function (tabs) {
     chrome.identity.getProfileUserInfo(function(userInfo) {
-      let user_id = userInfo.email;
-      let url = tabs[0].url;
-      let title = tabs[0].title;
-      $("#msgurl").text(url);
-      $("#msgtitle").text(title);
-      $("#msguserid").text(user_id);
+      $("#msgurl").text(tabs[0].url);
+      $("#msgtitle").text(tabs[0].title);
+      $("#msguserid").text(userInfo.email);
     });
   });
 });
 
-function initital_function (){
+function initial_function (){
 callapi().then( v => {
   chrome.tabs.query({'active': true, 'lastFocusedWindow': true}, function (tabs) {
     chrome.identity.getProfileUserInfo(function(userInfo) {
-      let user_id = userInfo.email;
-      let url = tabs[0].url;
       let title = tabs[0].title;
       data = v;
       arr = valcount(data, title);
@@ -54,7 +48,7 @@ callapi().then( v => {
 });
 }
 
-initital_function();
+initial_function();
 
 async function callapi(){
   console.log("call http get success")
