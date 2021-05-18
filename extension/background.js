@@ -47,7 +47,7 @@ chrome.runtime.onMessage.addListener(function(response, sender, sendResponse){
     let comment = response.comment;
 
     // post resquest url
-    let requestURL = "http://127.0.0.1:8000/users/" + user_id + "/" + news_url + "/" + news_result + "/" + comment ;
+    let requestURL = `http://127.0.0.1:8000/users/${user_id}/${news_url}/${news_result}/${comment}`
 
     // data of json
     let dataJSON = {
