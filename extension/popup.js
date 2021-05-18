@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', function () {
   });
 });
 
-function foo (){
+function initital_function (){
 callapi().then( v => {
   chrome.tabs.query({'active': true, 'lastFocusedWindow': true}, function (tabs) {
     chrome.identity.getProfileUserInfo(function(userInfo) {
@@ -43,13 +43,12 @@ callapi().then( v => {
               legend: {
                   reverse: true,
                   labels: {
-                      // This more specific font property overrides the global property
                       font: {
                           size: 18
-                      }
                   }
-            }
+              }
           }
+        }
         }
       });
     });
@@ -57,7 +56,7 @@ callapi().then( v => {
 });
 }
 
-foo();
+initital_function();
 
 async function callapi(){
   console.log("call http get success")
