@@ -16,4 +16,4 @@ The repo is a chrome extension for fake info system.
 * Search any news in [聯合新聞網](https://udn.com/news/index).
 * Pin 'News' chrome extension and click it.
 
-  <img src="./image/image6.png" alt="Editor" width="500">
+  <img src="./image/image7.png" alt="Editor" width="500">
