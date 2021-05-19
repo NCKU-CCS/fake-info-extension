@@ -1,5 +1,4 @@
-exports = {
-    "parser": "babel-eslint",
+module.exports = {
     "env": {
         "browser": true,
         "es2021": true
@@ -19,11 +18,5 @@ exports = {
         "react"
     ],
     "rules": {
-        "comma-dangle": 0,
-        "react/jsx-uses-vars": 1,
-        "react/display-name": 1,
-        "no-unused-vars": "warn",
-        "no-console": 1,
-        "no-unexpected-multiline": "warn"
     }
 };

@@ -26,7 +26,7 @@ chrome.runtime.onInstalled.addListener(function() {
 });
 
 // 每次tab有變動，檢查現在這個current tab是否在指定的 url pattern底下
-chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab) {
+chrome.tabs.onUpdated.addListener(function() {
     queryTabsAndShowPageActions({
         "active": true,
         "currentWindow": true,
@@ -36,10 +36,10 @@ chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab) {
 
 
 // for post request
-chrome.runtime.onMessage.addListener(function(response, sender, sendResponse){
+chrome.runtime.onMessage.addListener(function(response){
 
 
-    console.log("botton start");
+    console.log("button start");
 
     let user_id = response.user_id;
     let news_result = response.result;
@@ -66,7 +66,7 @@ chrome.runtime.onMessage.addListener(function(response, sender, sendResponse){
         success: function(returnData){
             console.log(returnData);
             console.log("post successed.");
-            console.log("botton over.");
+            console.log("button over.");
         },
         error: function(xhr, ajaxOptions, thrownError){
             console.log(xhr.status);

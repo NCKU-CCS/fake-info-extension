@@ -9,43 +9,40 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 function initial_function (){
-callapi().then( v => {
-  chrome.tabs.query({'active': true, 'lastFocusedWindow': true}, function (tabs) {
-    chrome.identity.getProfileUserInfo(function(userInfo) {
-      let title = tabs[0].title;
-      data = v;
-      arr = valcount(data, title);
-      let ctx = document.getElementById('myChart').getContext('2d');
-      let myChart = new Chart(ctx, {
-        type: 'pie',
-        data: {
-            labels: ['不真實', '真實'],
-            datasets: [{
-                label: '# of Votes',
-                data: [arr[1], arr[0]],
-                backgroundColor: [
-                    '#CB5A74',
-                    '#3C5088',
-                ],
-                borderWidth: 0
-            }]
-        },
-        options: {
-          plugins: {
-              legend: {
-                  reverse: true,
-                  labels: {
-                      font: {
-                          size: 18
-                  }
-              }
+  callapi().then( v => {
+    chrome.tabs.query({'active': true, 'lastFocusedWindow': true}, function (tabs) {
+        let title = tabs[0].title;
+        let arr = valcount(v, title);
+        let ctx = document.getElementById('myChart').getContext('2d');
+        let myChart = new Chart(ctx, {
+          type: 'pie',
+          data: {
+              labels: ['不真實', '真實'],
+              datasets: [{
+                  label: '# of Votes',
+                  data: [arr[1], arr[0]],
+                  backgroundColor: [
+                      '#CB5A74',
+                      '#3C5088',
+                  ],
+                  borderWidth: 0
+              }]
+          },
+          options: {
+            plugins: {
+                legend: {
+                    reverse: true,
+                    labels: {
+                        font: {
+                            size: 18
+                        }
+                    }
+                }
+            }
           }
-        }
-        }
-      });
+        });
     });
   });
-});
 }
 
 initial_function();
@@ -54,6 +51,7 @@ async function callapi(){
   console.log("call http get success")
   let jsondata;
   await new Promise((resolve, reject) => {
+    console.log(reject);
       $.ajax({
           type :"GET",
           url  : "http://localhost:8000/users",
@@ -64,7 +62,8 @@ async function callapi(){
               resolve();
           },
           error: function (xhr, ajaxOptions, thrownError) {
-              resolve();
+            console.log(xhr, ajaxOptions, thrownError)
+            resolve();
           }
       });
   })
@@ -75,14 +74,11 @@ function valcount(jsondata, title){
   let i, t = 0, f = 0;
   for (i = 0; i < jsondata.length; i++) {
     if (jsondata[i].news_url == title){
-
       if (jsondata[i].news_result){
           t = t + 1;
-          console.log("t+1");
       }
       else if (jsondata[i].news_result == false){
           f = f + 1;
-          console.log("f+1");
       }
     }
   }
