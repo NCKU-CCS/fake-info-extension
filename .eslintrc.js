@@ -1,7 +1,12 @@
 module.exports = {
     "env": {
         "browser": true,
-        "es2021": true
+        "es2021": true,
+        "webextensions": true,
+        "jquery": true,
+        "amd": true,
+        "node": true,
+        "chart":true
     },
     "extends": [
         "eslint:recommended",

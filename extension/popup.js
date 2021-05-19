@@ -14,7 +14,7 @@ function initial_function (){
         let title = tabs[0].title;
         let arr = valcount(v, title);
         let ctx = document.getElementById('myChart').getContext('2d');
-        let myChart = new Chart(ctx, {
+        new Chart(ctx, {
           type: 'pie',
           data: {
               labels: ['不真實', '真實'],
