@@ -1,6 +1,6 @@
 # fake-info-extension
 The repo is a chrome extension for fake info system.
-* [front end](https://github.com/NCKU-CCS/fake-info-backend)
+* [back end](https://github.com/NCKU-CCS/fake-info-backend)
 ## Getting Started
 ### Prerequisites
 * Google Chrome
