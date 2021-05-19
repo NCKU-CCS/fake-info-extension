@@ -46,7 +46,7 @@ chrome.runtime.onMessage.addListener(function(response){
     let news_url = response.title;
     let comment = response.comment;
 
-    // post resquest url
+    // post request url
     let requestURL = `http://127.0.0.1:8000/users/${user_id}/${news_url}/${news_result}/${comment}`
 
     // data of json
@@ -65,7 +65,7 @@ chrome.runtime.onMessage.addListener(function(response){
         contentType: "application/json;charset=utf-8",
         success: function(returnData){
             console.log(returnData);
-            console.log("post successed.");
+            console.log("post success.");
             console.log("button over.");
         },
         error: function(xhr, ajaxOptions, thrownError){

@@ -15,7 +15,7 @@
     flex-direction: column;
     }
 
-    #msgtitle {			 /* title */
+    #page_title {			 /* title */
     position: relative;
     left: 40px;
 	top:  26px;
@@ -60,7 +60,7 @@
     width: 360px;
 	}
 
- 	.user_botton {       /* 按鈕 */
+ 	.user_button {       /* 按鈕 */
     position: relative;
     left: 15px;
 	height: 84px;

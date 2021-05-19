@@ -1,18 +1,18 @@
 document.addEventListener('DOMContentLoaded', function () {
 	chrome.tabs.query({'active': true, 'lastFocusedWindow': true}, function (tabs) {
     chrome.identity.getProfileUserInfo(function(userInfo) {
-      $("#msgurl").text(tabs[0].url);
-      $("#msgtitle").text(tabs[0].title);
-      $("#msguserid").text(userInfo.email);
+      $("#page_url").text(tabs[0].url);
+      $("#page_title").text(tabs[0].title);
+      $("#user_id").text(userInfo.email);
     });
   });
 });
 
 function initial_function (){
-  callapi().then( v => {
+  api().then( v => {
     chrome.tabs.query({'active': true, 'lastFocusedWindow': true}, function (tabs) {
         let title = tabs[0].title;
-        let arr = valcount(v, title);
+        let arr = value_count(v, title);
         let ctx = document.getElementById('myChart').getContext('2d');
         new Chart(ctx, {
           type: 'pie',
@@ -47,9 +47,10 @@ function initial_function (){
 
 initial_function();
 
-async function callapi(){
+// http get data from api server.
+async function api(){
   console.log("call http get success")
-  let jsondata;
+  let json_data;
   await new Promise((resolve, reject) => {
     console.log(reject);
       $.ajax({
@@ -58,7 +59,7 @@ async function callapi(){
           data : "check",
           dataType: "json",
           success : function(result) {
-              jsondata = result;
+              json_data = result;
               resolve();
           },
           error: function (xhr, ajaxOptions, thrownError) {
@@ -67,17 +68,18 @@ async function callapi(){
           }
       });
   })
-  return jsondata;
+  return json_data;
 }
 
-function valcount(jsondata, title){
+// calculate count of results(true, false).
+function value_count(json_data, title){
   let i, t = 0, f = 0;
-  for (i = 0; i < jsondata.length; i++) {
-    if (jsondata[i].news_url == title){
-      if (jsondata[i].news_result){
+  for (i = 0; i < json_data.length; i++) {
+    if (json_data[i].news_url == title){
+      if (json_data[i].news_result){
           t = t + 1;
       }
-      else if (jsondata[i].news_result == false){
+      else if (json_data[i].news_result == false){
           f = f + 1;
       }
     }
@@ -90,15 +92,15 @@ document.getElementById("send_false").addEventListener("click", result_false);
 
 function  result_true() {
   let result = 1;
-  botton_result(result);
+  button_result(result);
 }
 
 function  result_false() {
   let result = 0;
-  botton_result(result);
+  button_result(result);
 }
 
-function botton_result(parameter){
+function button_result(parameter){
   chrome.tabs.query({'active': true, 'lastFocusedWindow': true}, function (tabs) {
     chrome.identity.getProfileUserInfo(function(userInfo) {
       var val = document.getElementById("input_text").value ;
@@ -108,7 +110,6 @@ function botton_result(parameter){
         user_id : userInfo.id.toString(),
         user_email : userInfo.email,
         result : parameter,
-        get_noresult : 0,
         comment : val
       }
       chrome.runtime.sendMessage(data);
