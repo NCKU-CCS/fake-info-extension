@@ -1,12 +1,11 @@
-module.exports = {
+{
     "env": {
         "browser": true,
         "es2021": true,
-        "web extensions": true,
+        "webextensions": true,
         "jquery": true,
         "amd": true,
-        "node": true,
-        "chart":true
+        "node": true
     },
     "extends": [
         "eslint:recommended",
@@ -22,6 +21,10 @@ module.exports = {
     "plugins": [
         "react"
     ],
-    "rules": {
-    }
-};
+    "rules": {},
+    "settings": {
+        "react": {
+          "version": "latest"
+        }
+      }
+}
