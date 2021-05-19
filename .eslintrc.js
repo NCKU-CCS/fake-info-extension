@@ -2,7 +2,7 @@ module.exports = {
     "env": {
         "browser": true,
         "es2021": true,
-        "webextensions": true,
+        "web extensions": true,
         "jquery": true,
         "amd": true,
         "node": true,
