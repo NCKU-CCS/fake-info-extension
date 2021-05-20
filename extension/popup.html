@@ -2,23 +2,26 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>Google Extensions Easy Sample</title>
-        <link rel="stylesheet" type="text/css" href="popup.css" />
+        <title>Demo</title>
+        <link href="popup.css" rel="stylesheet" type="text/css" charset="utf-8">
+        <script src = "chart.min.js"></script>
         <script type = 'text/javascript' src="jquery-3.1.1.min.js"></script>
     </head>
 
     <body>
-
-        <!-- <div id = "msgurl" >Show URL</div> -->
-        <h1>News Title：</h1>
-        <div id = "msgtitle" ></div>
-
-        <button id = "send_true">真實</button>
-        <button id = "send_false">不真實</button>
-
+        <div class = "flex_container">
+            <div id="page_title"></div>
+            <div class = "user_data">
+                <canvas id="myChart"></canvas>
+            </div>
+            <div class = "user_comment">
+                <form><input type="text" id="input_text" placeholder="請寫下你的評論（選填）......" onfocus="this.placeholder=''" onblur="this.placeholder='請寫下你的評論（選填）......'"></form>
+            </div>
+            <div class = "user_button">
+                <button id = "send_true">真實</button>
+                <button id = "send_false">不真實</button>
+            </div>
+        </div>
         <script type = 'text/javascript' src="popup.js"></script>
-
     </body>
-
-
 </html>

@@ -26,7 +26,7 @@ chrome.runtime.onInstalled.addListener(function() {
 });
 
 // 每次tab有變動，檢查現在這個current tab是否在指定的 url pattern底下
-chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab) {
+chrome.tabs.onUpdated.addListener(function() {
     queryTabsAndShowPageActions({
         "active": true,
         "currentWindow": true,
@@ -36,23 +36,25 @@ chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab) {
 
 
 // for post request
-chrome.runtime.onMessage.addListener(function(response, sender, sendResponse){
+chrome.runtime.onMessage.addListener(function(response){
 
 
-    console.log("botton start");
+    console.log("button start");
 
     let user_id = response.user_id;
     let news_result = response.result;
     let news_url = response.title;
+    let comment = response.comment;
 
-    // post resquest url
-    let requestURL = "http://127.0.0.1:8000/users/" + user_id + "/" + news_url + "/" + news_result  ;
+    // post request url
+    let requestURL = `http://127.0.0.1:8000/users/${user_id}/${news_url}/${news_result}/${comment}`
 
     // data of json
     let dataJSON = {
         user_id : user_id ,
         news_url : news_url ,
-        news_result : news_result
+        news_result : news_result,
+        comment : comment
     };
 
     $.ajax({
@@ -63,8 +65,8 @@ chrome.runtime.onMessage.addListener(function(response, sender, sendResponse){
         contentType: "application/json;charset=utf-8",
         success: function(returnData){
             console.log(returnData);
-            console.log("post successed.");
-            console.log("botton over.");
+            console.log("post success.");
+            console.log("button over.");
         },
         error: function(xhr, ajaxOptions, thrownError){
             console.log(xhr.status);
