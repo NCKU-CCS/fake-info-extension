@@ -19,7 +19,8 @@
         "sourceType": "module"
     },
     "plugins": [
-        "react"
+        "react",
+        "chartjs"
     ],
     "rules": {},
     "settings": {

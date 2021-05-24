@@ -1,3 +1,4 @@
+import Chart from 'chart.js'
 document.addEventListener('DOMContentLoaded', function () {
 	chrome.tabs.query({'active': true, 'lastFocusedWindow': true}, function (tabs) {
     chrome.identity.getProfileUserInfo(function(userInfo) {
@@ -7,14 +8,12 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   });
 });
-
 function initial_function (){
   api().then( v => {
     chrome.tabs.query({'active': true, 'lastFocusedWindow': true}, function (tabs) {
         let title = tabs[0].title;
         let arr = value_count(v, title);
         let ctx = document.getElementById('myChart').getContext('2d');
-        let Chart;
         new Chart(ctx, {
           type: 'pie',
           data: {
