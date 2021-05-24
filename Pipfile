@@ -4,8 +4,8 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-commitizen "==2.17.6"
-pre-commit "==2.12.1"
+commitizen = "==2.17.6"
+pre-commit = "==2.12.1"
 
 [dev-packages]
 
