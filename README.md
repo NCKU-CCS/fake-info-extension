@@ -26,13 +26,6 @@ The repo is a chrome extension for fake info system.
 ```
 $ npm i -g eslint
 ```
-* Next, install `eslint-plugin-chartjs`:
-
-```
-$ npm install eslint-plugin-chartjs --save-dev
-
-```
-Note: If you installed ESLint globally (using the -g flag) then you must also install eslint-plugin-chartjs globally.
 #### Usage
 This installs the ESLint CLI from the npm repository. To run ESLint, use the following format:
 ```
